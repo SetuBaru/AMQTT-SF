@@ -1,0 +1,27 @@
+listeners:
+    default:
+        max-connections: 50000
+        type: tcp
+    my-tcp-1:
+        bind: 127.0.0.1:1883
+    my-tcp-2:
+        bind: 1.2.3.4:1884
+        max-connections: 1000
+    my-tcp-ssl-1:
+        bind: 127.0.0.1:8885
+        ssl: off
+    my-ws-1:
+        bind: 0.0.0.0:8080
+        type: ws
+timeout-disconnect-delay: 2
+auth:
+    plugins: ['auth.anonymous'] #List of plugins to activate for authentication among all registered plugins
+    allow-anonymous: true
+topic-check:
+    enabled: false  # Set to False if topic filtering is not needed
+    plugins: ['topic_acl'] #List of plugins to activate for topic filtering among all registered plugins
+    acl:
+        # username: [list of allowed topics]
+        username1: ['repositories/+/master', 'calendar/#', 'data/memes']  # List of topics on which client1 can publish and subscribe
+        username2: ...
+        anonymous: []  # List of topics on which an anonymous client can publish and subscribe
